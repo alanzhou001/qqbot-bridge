@@ -49,8 +49,6 @@ openclaw agents list
   --message "我是浙江考生，物化生，620分，位次2万左右，想学计算机，帮我看看志愿"
 ```
 
-如果这条不通，先修 OpenClaw agent，再启动 Bridge。
-
 ## 3. 配置 NapCat
 
 在 NapCat WebUI 中启用 OneBot v11 WebSocket Server：
@@ -60,8 +58,6 @@ Host: 127.0.0.1
 Port: 3001
 Access Token: 强随机 token
 ```
-
-不要把 Host 配成 `0.0.0.0`，先只监听本机。
 
 ## 4. 配置 Bridge
 
@@ -83,7 +79,7 @@ OPENCLAW_GATEWAY_TOKEN=你的OpenClaw Gateway Token
 ALLOWED_GROUPS=正式使用时填写群号白名单
 ```
 
-如果你的 OpenClaw 使用 password 而不是 token，则填写 `OPENCLAW_GATEWAY_PASSWORD`。当前 CLI 报错 `GatewaySecretRefUnavailableError` 时，就说明 Bridge 的运行环境需要显式设置这两个变量之一。
+如果你的 OpenClaw 使用 password 而不是 token，则填写 `OPENCLAW_GATEWAY_PASSWORD`。
 
 数据库默认写入 `qqbot-data/qqbot.sqlite3`。如果 File 盘路径变化，改 `.env` 中的 `DATA_DIR` 和 `DB_PATH`。
 
@@ -102,7 +98,7 @@ qqbot-data/rag_context/groups/<群号>.md
 qqbot-data/rag_context/users/<QQ号>.md
 ```
 
-读取到的内容会被限制在 `RAG_CONTEXT_MAX_CHARS` 内，再注入 `qqbot` prompt。这样后续本地 RAG 可以独立演进，不需要把 QQ 协议层塞进 OpenClaw Gateway。
+读取到的内容会被限制在 `RAG_CONTEXT_MAX_CHARS` 内，再注入 `qqbot` prompt。后续本地 RAG 可以独立演进，不需要把 QQ 协议层塞进 OpenClaw Gateway。
 
 新增或更新 `qqbot-data/knowledge/` 下的录取资料后，运行：
 
